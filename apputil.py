@@ -7,7 +7,6 @@ from sklearn.cluster import KMeans
 # Load the diamonds dataset from Seaborn as a global variable
 df_diamonds = sns.load_dataset('diamonds')
 df_diamonds_num = df_diamonds[['carat', 'depth', 'table', 'price', 'x', 'y', 'z']]
-print(df_diamonds_num.head())
 
 def kmeans(X, k):
     """ Run the scikit learn kmeans model on the data X and return
@@ -29,7 +28,20 @@ def kmeans(X, k):
     return km.cluster_centers_, km.labels_
 
 def kmeans_diamonds(n, k):
-    pass
+    """ Runs kmeans with k clusters on the first n rows of data from
+    the diamonds dataset
+
+    Args:
+        n (int): the number of rows to use
+        k (int): the number of clusters
+
+    Returns:
+        tuple: a np.array of the centroids followed by an np.array of
+        the cluster indices for each point in X
+    """
+    # Get just the first n rows
+    X = df_diamonds_num.iloc[:n]
+    return kmeans(X, k)
 
 
 if __name__ == '__main__':
@@ -43,3 +55,5 @@ if __name__ == '__main__':
     X = np.array(X)
 
     print(kmeans(X, 3))
+
+    print(kmeans_diamonds(4, 2))
