@@ -43,6 +43,25 @@ def kmeans_diamonds(n, k):
     X = df_diamonds_num.iloc[:n]
     return kmeans(X, k)
 
+def kmeans_timer(n, k, n_iter=5):
+    # The total time across the runs
+    total_time = 0
+
+    # Repeat the kmeans algorithm, keeping track of the total time
+    for i in range(n_iter):
+        # Using perf_counter() instead of time() because it's technically
+        # designed for timing runtime performance, although it usually
+        # doesn't matter
+        start = time.perf_counter()
+        kmeans_diamonds(n, k)
+        end = time.perf_counter()
+
+        # Calculate the elapsed time
+        total_time += end - start
+
+    # Return the average time per run
+    return total_time / n_iter
+
 
 if __name__ == '__main__':
     import random
@@ -56,4 +75,4 @@ if __name__ == '__main__':
 
     print(kmeans(X, 3))
 
-    print(kmeans_diamonds(4, 2))
+    print(kmeans_timer(1000, 5))
