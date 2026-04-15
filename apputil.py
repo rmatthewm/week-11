@@ -44,6 +44,17 @@ def kmeans_diamonds(n, k):
     return kmeans(X, k)
 
 def kmeans_timer(n, k, n_iter=5):
+    """ Times the execution of n_iter iterations of kmeans with the 
+    diamonds dataset and returns the average runtime.
+
+    Args:
+        n (int): the number of rows to include from the diamonds data
+        k (int): the number of clusters
+        n_iter (int, optional): the number of iterations to run. Defaults to 5.
+
+    Returns:
+        float: the number of seconds for the average runtime
+    """
     # The total time across the runs
     total_time = 0
 
